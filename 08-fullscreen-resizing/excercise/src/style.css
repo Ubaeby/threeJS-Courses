@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* The following Styling causes the canvas to take up the entire space of the view and ensuring that no one can scroll past it */
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+html,
+body {
+    overflow: hidden;
+}
