@@ -31,7 +31,6 @@ const cursor = {
 window.addEventListener('mousemove', event => {
     cursor.x = event.clientX / sizes.width - 0.5
     cursor.y = -(event.clientY / sizes.height - 0.5) 
-    console.log(cursor.x, cursor.y)
 })
 
 /**
@@ -44,6 +43,7 @@ const matcapsTexture = textureLoader.load(`./textures/matcaps/8.png`)
 
 const fontLoader = new FontLoader()
 
+let donuts = []
 
 fontLoader.load(
     '/fonts/helvetiker_regular.typeface.json',
@@ -100,6 +100,11 @@ fontLoader.load(
 
         for (let i = 0; i < 100; i++) {
             const donut = new THREE.Mesh(donutGeometry, material)
+
+            donuts.push({
+                mesh: donut,
+                rotate: Math.PI * 0.002,
+            })
 
             donut.position.x = (Math.random() - 0.5) * 13
             donut.position.y = (Math.random() - 0.5) * 13
@@ -187,6 +192,13 @@ const tick = () => {
     camera.position.x = cursor.x * 10
     camera.position.y = cursor.y * 10
     camera.position.z = 4
+
+    
+    // Update Donuts
+    donuts.forEach(({mesh, rotate}) =>{
+        mesh.rotateX(rotate)
+        mesh.rotateY(rotate)
+    })
 
     // Update controls
     controls.update()
